@@ -1,12 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 export default function Login() {
   const { register, handleSubmit } = useForm<FormData>();
-  const router = useRouter()
   const onSubmit = async (data: any) => {
     console.log({ data });
     const response = await fetch("https://wokpa.ddns.net/api/listeners/login", {
@@ -21,10 +19,8 @@ export default function Login() {
         password: data.password,
       }).toString(),
     });
-    if(!response.ok) Error("An error ocurred")
     const json = await response.json();
-    router.push("/")
-    console.log({ json })
+    console.log({ json });
   };
 
   return (
